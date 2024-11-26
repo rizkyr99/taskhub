@@ -1,0 +1,16 @@
+{
+  "name": "taskhub",
+  "version": "1.0.0",
+  "description": "An app for your tasks",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client"
+  },
+  "author": "Rizky Ramadhan",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
