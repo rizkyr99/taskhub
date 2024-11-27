@@ -44,3 +44,52 @@ export const register = async (req: Request, res: Response) => {
     res.status(400).json({ error: 'Error registering user' });
   }
 };
+
+export const login = async (req: Request, res: Response) => {
+  try {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.status(400).json({
+        success: false,
+        errors: errors.array(),
+      });
+      return;
+    }
+
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(400).json({ error: 'Invalid email or password' });
+      return;
+    }
+
+    if (!user.password) {
+      res.status(400).json({
+        error: 'Password is not set for this account. Please use Google login.',
+      });
+      return;
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      res.status(400).json({ error: 'Invalid email or password' });
+      return;
+    }
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
+      expiresIn: '1h',
+    });
+
+    const { password: _, ...userWithoutPassword } = user.toObject();
+    res.status(200).json({
+      message: 'Login successful',
+      user: userWithoutPassword,
+      token,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error logging in' });
+  }
+};
