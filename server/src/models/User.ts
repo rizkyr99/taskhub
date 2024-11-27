@@ -14,6 +14,12 @@ const schema = new Schema(
     },
     avatar: { type: String },
     password: { type: String },
+    workspaces: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Workspace',
+      },
+    ],
   },
   {
     timestamps: true,
