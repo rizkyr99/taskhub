@@ -1,8 +1,14 @@
 import express from 'express';
-import { getAllTasks } from '../controllers/taskController';
+import {
+  createTask,
+  getAllTasks,
+  validateTask,
+} from '../controllers/taskController';
+import { isAuthenticated } from '../middlewares/authMiddleware';
 
 const router = express.Router({ mergeParams: true });
 
-router.get('/', getAllTasks);
+router.get('/', isAuthenticated, getAllTasks);
+router.post('/', isAuthenticated, validateTask, createTask);
 
 export default router;

@@ -17,6 +17,12 @@ const schema = new Schema(
         ref: 'Project',
       },
     ],
+    members: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     timestamps: true,
