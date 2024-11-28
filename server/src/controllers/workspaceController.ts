@@ -46,6 +46,7 @@ export const createWorkspace = async (req: Request, res: Response) => {
         success: false,
         message: 'Workspace name is required',
       });
+      return;
     }
 
     const newWorkspace = new Workspace({

@@ -6,23 +6,20 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    owner: {
+    description: {
+      type: String,
+    },
+    workspace: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Workspace',
       required: true,
     },
-    projects: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Project',
-      },
-    ],
   },
   {
     timestamps: true,
   }
 );
 
-const Workspace = model('Workspace', schema);
+const Project = model('Project', schema);
 
-export default Workspace;
+export default Project;
