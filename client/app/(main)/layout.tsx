@@ -1,15 +1,14 @@
-import { AppSidebar } from '@/components/app-sidebar';
-import Topbar from '@/components/topbar';
-import { SidebarProvider } from '@/components/ui/sidebar';
+import AppSidebar from '@/components/AppSidebar';
+import Topbar from '@/components/Topbar';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <SidebarProvider>
-        <AppSidebar />
+      <AppSidebar />
+      <main className='lg:pl-64'>
         <Topbar />
-        <main>{children}</main>
-      </SidebarProvider>
+        {children}
+      </main>
     </>
   );
 };

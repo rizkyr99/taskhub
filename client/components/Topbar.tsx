@@ -1,3 +1,5 @@
+'use client';
+
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 import {
   DropdownMenuContent,
@@ -6,14 +8,28 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
-import { LogOut, Settings, User } from 'lucide-react';
+import { LogOut, Menu, Settings, User } from 'lucide-react';
+import { Button } from './ui/button';
+import useSidebarStore from '@/store/sidebarStore';
 
 const Topbar = () => {
+  const { openSidebar } = useSidebarStore();
+
   return (
     <nav className='h-20 w-full flex items-start justify-between p-4'>
-      <div>
-        <h1 className='font-bold text-lg'>Dashboard</h1>
-        <p className='text-xs text-neutral-500'>View all of your tasks here</p>
+      <div className='flex items-center gap-x-4'>
+        <Button
+          variant='ghost'
+          className='lg:hidden hover:bg-neutral-100'
+          onClick={openSidebar}>
+          <Menu />
+        </Button>
+        <div>
+          <h1 className='font-bold text-lg'>Dashboard</h1>
+          <p className='text-xs text-neutral-500'>
+            View all of your tasks here
+          </p>
+        </div>
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger>
