@@ -10,7 +10,7 @@ import { LogOut, Settings, User } from 'lucide-react';
 
 const Topbar = () => {
   return (
-    <nav className='h-20 w-full flex items-center justify-between p-4'>
+    <nav className='h-20 w-full flex items-start justify-between p-4'>
       <div>
         <h1 className='font-bold text-lg'>Dashboard</h1>
         <p className='text-xs text-neutral-500'>View all of your tasks here</p>
